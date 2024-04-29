@@ -1,0 +1,507 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+li,
+button,
+a {
+    color: white;
+    text-decoration: none;
+}
+
+body {
+    min-width: 600px;
+    /* prevent the body shrink too much */
+    background-color: rgba(238, 230, 254, 1);
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+/* ----------------------header----------------------------- */
+
+header {
+    background-image: linear-gradient(to right, rgba(172, 66, 255, 1), rgba(103, 40, 153, 1), rgba(96, 23, 154, 1), rgba(86, 7, 148, 1));
+    /* Replace with your navigation bar color */
+    height: 70px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    /* horizontal offset, vertical offset, blur radius, color */
+    display: flex;
+    justify-content: space-between;
+    /*push right and left and center */
+    align-items: center;
+    /*items inside will be align in center*/
+    min-width: 470px;
+    min-height: 50px;
+    margin-bottom: 50px;
+    position:sticky;
+}
+
+#name {
+    margin: 0px 20px;
+    color: white;
+
+}
+
+#horizontal_navigation ul {
+    list-style: none;
+    /*no bullet point */
+}
+
+#horizontal_navigation li {
+    display: inline-block;
+    /* go horizontal */
+    padding: 0px 20px;
+    /* top,button:0px, right left:20px */
+
+}
+
+#horizontal_navigation li a {
+    transition: all 0.3s ease 0s;
+}
+
+#horizontal_navigation li a:hover {
+    color: lightpink;
+    box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+#cta_button {
+    margin: 0px 20px;
+    /*for the location in navigation*/
+    padding: 9px 10px;
+    /* PADDING size for button */
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+#cta_button:hover {
+    background-color: rgba(169, 0, 0, 0.8);
+}
+
+/* ----------------------main container----------------------------- */
+
+.main_container {
+    display: flex;
+    /* Use Flexbox to layout the child divs */
+    max-width: 1500px;
+    border-radius: 10px;
+   
+    /* Set padding inside the outer container */
+    justify-content: space-around;
+    /* Distribute space around the inner containers */
+   
+    width: 100%;
+    height: 70vh;
+    /* Optional: Set the height to fill the viewport vertically */
+    margin-bottom: 50px;
+    
+
+
+}
+
+/* ----------------------main container-subcontainers---------------------------- */
+
+.subcontainer-1,
+.subcontainer-2 {
+    box-shadow: inset 5px 5px 5px #737171;
+    border-radius: 5px;
+    flex-grow: 1;
+    display: flex;
+    margin: 20px;
+   
+}
+
+.subcontainer-1 {
+
+    /* Enable Flexbox within the containers */
+    justify-content: center;
+    /* Center the content horizontally */
+    align-items: center;
+    /* Center the content vertically */
+    /*when minimizing, it would not be affected by the right had container*/
+    min-width: 400px;
+    min-height: 400px;
+    box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 251, 245, 1);
+
+}
+
+.subcontainer-2 {
+
+    flex-direction: column;
+    max-width: max-content;
+    overflow: auto;
+    background-color: rgba(255, 251, 245, 1);
+    /* Handle extra content gracefully */
+
+}
+
+/* ----------------------main container-subcontainer-2---------------------------- */
+
+.searchplace_bar {
+    display: flex;
+    /* Enables Flexbox layout */
+    justify-content: flex-start;
+    /* Aligns children to the start, keeping search bar and button on the left */
+    align-items: center;
+    /* Vertically aligns items in the center */
+    max-width: 100%;
+    /* Ensure they do not exceed the container's width */
+    padding: 10px;
+}
+
+.searchplace_bar input[type="text"] {
+    box-shadow: inset 5px 5px 5px #737171;
+    border: 0px;
+    border-radius: 5px;
+    width: 300px;
+    height: 30px;
+    background-color: rgba(255, 251, 245, 1);
+    margin-right: 10px;
+    /* Adds a little space between the search button and the search bar */
+    padding-left: 10px;
+    /*make the text inside shift to the right*/
+
+}
+
+.searchplace_bar .search {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 0px;
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchplace_bar .refresh {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: blueviolet;
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    margin-left: auto;
+    /* Pushes the refresh button to the right */
+
+}
+
+.recommended_places {
+    display: flex;
+    flex-wrap: wrap;
+    /* can display the items column by column */
+    max-width: 658px;
+    /* Ensures no more than 3 boxes per row */
+    gap: 15px;
+    /* Space between boxes */
+    padding: 15px;
+    
+}
+
+/* need to add more boxes */
+.box {
+    display: flex;
+    justify-content: center;
+    /* Center content horizontally */
+    align-items: center;
+    /* Center content vertically */
+    width: calc(33.333% - 10px);
+    /* Each box takes up a third of the container width minus gap */
+    border-radius: 10px;
+    min-width: 110px;
+    /* Minimum width for responsiveness */
+    min-height: 150px;
+    /* Minimum height for responsiveness */
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    background-color: rgba(217, 217, 217, 1);
+}
+
+/* need to add more places */
+.place_name{
+    display: flex;
+    background-color: white;
+    margin-top: auto;
+    width: 100%;
+    height:80%;
+    border: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.place_name button,
+p {
+    color:#000;
+    display: flex;
+    margin: 5px;
+
+}
+
+.place_name button{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: blueviolet;
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+/* Adjusted for visibility and layering */
+.place_name {
+    z-index: 1;
+    /* Ensure visibility above the box background */
+    opacity: 0;
+    /* Start hidden */
+    transition: opacity 0.3s ease;
+    /* Smooth transition for visibility */
+}
+
+.box:hover .place_name {
+    opacity: 0.8;
+    /* Make visible on hover */
+
+}
+
+/* ------------------------submain_container-------------------- */
+
+.day_count {
+    display: flex;
+    background-color: rgba(255, 251, 245, 1);
+    margin: 20px;
+    max-width: max-content;
+    border-radius: 15px;
+    padding: 10px 20px;
+    box-shadow: inset 5px 5px 5px #737171;
+}
+
+.placeAdd {
+    display: flex;
+    /*Establishes the container as a flex container, enabling flex context for all its direct children (flex items). */
+    overflow-x: scroll;
+    /* Allows horizontal scrolling within the container if the flex items overflow the container's width. */
+    white-space: nowrap;
+    /*Prevents wrapping of flex items to a new line within the container, ensuring all items are laid out in a single row. */
+    position: relative;
+    /* Sets the positioning context of the flex container to relative, allowing absolute positioned elements inside it to be positioned relative to this container. */
+    align-items: center;
+    /* Vertically aligns flex items in the center of the container, regardless of their height, creating a vertically centered layout within the container. */
+    margin: 20px;
+    background-color: rgba(255, 251, 245, 1);
+    box-shadow: inset 3px 3px 5px #737171;
+    border-radius: 10px;
+
+}
+
+.placeAdd .item{
+    display:flex;
+    margin:20px;
+    flex-direction: column;
+}
+
+.time-item, .place-item{
+    flex: 0 0 auto;
+    /*auto:This sets the initial main size of the flex item to be based upon its width or height properties if specified, or its content size if not explicitly set. Essentially, it tells the browser to look at the item's 
+    intrinsic size for laying it out in the flex container.*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 160px;
+    background-color: lightblue;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.time-item {
+    height: 40px;
+    margin-bottom:5px;
+    border-radius: 5px;
+    
+}
+
+.place-item {
+    display:flex;
+    flex-direction: column;
+    height: 160px; 
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line */
+
+}
+
+
+.place-content button{
+    
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: blueviolet;
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.place-content{
+    display:flex;
+    background-color: white;
+    margin-bottom: auto;
+    height:80%;
+    border:0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;  
+    container-type: inline-size;
+    
+}
+.place-content p{
+    width:100%;
+    /* font-size: clamp(3cqi,5cqi,10cqi); */
+    word-wrap: break-word !important; /* Ensure long words do not overflow */
+    height:50%;
+    justify-content: center;
+    align-items: center;
+    margin:0;
+    
+}
+
+.place-content button{
+    display:flex;
+    margin-top: 10px;
+    flex-wrap: wrap; /* Allows items to wrap onto the next line */
+
+}
+
+
+/* Adjusted for visibility and layering */
+.place-content{
+    z-index: 1;
+    /* Ensure visibility above the box background */
+    opacity: 0;
+    /* Start hidden */
+    transition: opacity 0.3s ease;
+    /* Smooth transition for visibility */
+}
+
+.place-item:hover .place-content{
+    opacity: 0.8;
+    /* Make visible on hover */
+
+}
+
+
+.submain_container {
+    margin: 50px 0px;
+    display: flex;
+    background-color: blueviolet;
+    max-width: 1500px;
+    box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.5);
+    /* Add a border for visibility */
+    width: 100%;
+    height: 50vh;
+    flex-direction: column;
+    /* show all items column by column */
+    border-radius: 10px;
+}
+
+/* ----------dustbin button-------- */
+/* .dustbin {
+    background-color: blueviolet;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+
+} */
+
+/* --------------footer--------------------- */
+
+footer {
+    margin-top: 100px;
+    background-image: linear-gradient(to right, rgba(172, 66, 255, 1), rgba(103, 40, 153, 1), rgba(96, 23, 154, 1), rgba(86, 7, 148, 1));
+    /* Replace with your navigation bar color */
+    height: 70px;
+    box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.5);
+    /* horizontal offset, vertical offset, blur radius, color */
+    display: flex;
+    min-width: 470px;
+    min-height: 200px;
+    justify-content: center;
+    align-items: center;
+    overflow:hidden;
+    flex-direction: row;
+
+}
+
+
+
+/* Media query for smaller screens */
+@media (max-width: 950px) {
+    .main_container {
+        flex-direction: column;
+        height: 140vh;
+        /* Stack containers vertically */
+        max-width: 700px;
+        margin: 0 auto;
+        /* Center horizontally */
+        position: relative;
+        top: 50%;
+        margin-bottom: 50px;
+    }
+
+    .submain_container {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        top: 50%;
+    }
+
+    .subcontainer-1,
+    .subcontainer-2 {
+        flex-grow: 1;
+        /* Adjust width to fill the container */
+        /* Adjust height as necessary, or keep it responsive */
+
+    }
+}
+
+/* for larger screen */
+@media (min-width: 1500px) {
+
+    /* Adjust the min-width as needed */
+    .main_container {
+
+        margin: 0 auto;
+        /* Center horizontally */
+        position: relative;
+        top: 50%;
+        margin-bottom: 50px;
+
+    }
+
+    .submain_container {
+        margin: 0 auto;
+        /* Center horizontally */
+        position: relative;
+        top: 50%;
+    }
+}
+
+
+
+
+
+
+
