@@ -125,6 +125,17 @@ function App() {
     setRoutesArray([...routesSelected]);
   };
 
+  let removeRoute = (place) =>{
+    let tmpArr = []
+    let routesSelected =  routesArray;
+    for( let i of routesSelected){
+      if (i !== place){
+        tmpArr.push(i);
+      }
+    }
+    setRoutesArray(tmpArr)
+  }
+
 
   return (
     <div>
@@ -158,6 +169,7 @@ function App() {
             className="box"
             style={{
               backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
+              backgroundRepeat: 'no-repeat'
             }}
           >
             <div className="place_name">
@@ -168,7 +180,7 @@ function App() {
                 }}
                 style={{ fontSize: "20px" }}
               >
-                <i className="fa fa-plus"></i>
+                <i className="fa fa-plus"> +</i>
               </button>
             </div>
           </div>
@@ -183,12 +195,14 @@ function App() {
             <div className="item">
             <div className="place-item" style={{
               backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover'
             }}>
         
               <div className="place-content">
                 <p>{el['displayName']}</p>
-                <button >
-                  <i>+</i>
+                <button onClick={()=>{removeRoute(el)}}>
+                  <i>-</i>
                 </button>
               </div>
             </div>
