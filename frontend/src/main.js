@@ -7,7 +7,6 @@ import {
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 import { Loader } from "@googlemaps/js-api-loader";
-
 const YOUR_API_KEY = "AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"; // Replace with your actual API key
 
 function App() {
@@ -20,6 +19,9 @@ function App() {
   const [markers, setMarkers] = useState([]);
   const [allPlaceArray, setPlaceArray] = useState([]);
   const [routesArray, setRoutesArray] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
+
   useEffect(() => {
     console.log("allPlace: ", allPlaceArray);
   }, [allPlaceArray]);
@@ -27,6 +29,76 @@ function App() {
   useEffect(() => {
     console.log("routesArray: ", routesArray);
   }, [routesArray]);
+
+
+  
+
+
+let loadRoutes = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/getRoute');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    // Check if the data is as expected (e.g., an array of routes)
+    if (!Array.isArray(data)) {
+      throw new Error('Unexpected response format');
+    }
+
+    console.log('Data received:', data);
+
+    setRoutesArray(data);
+
+  } catch (error) {
+    console.error('Error loading routes:', error);
+    alert('Failed to load routes. Please try again later.');
+  }
+};
+
+  useEffect(()=>{
+    loadRoutes()
+  }, [])
+
+  let create = (data) => {
+    fetch("http://localhost:3000/addRoute", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then(async (data) => {
+        console.log("Success:", data);
+        alert("Items added successfully!, pls click the View All button to see your added items")
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to add items");
+      });
+  };
+
+  let deletor = async (data) => {
+    console.log(data);
+    try {
+      const response = await fetch(`http://localhost:3000/delete/${data.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        const result = await response.json();
+        console.log("Success:", data);
+      }
+    } catch (error) {
+      console.error("delete failed:", error);
+    }
+  };
 
   const sendEmail = async (places, addy) => {
     const data = { places, email: addy }; // Your JSON object
@@ -70,7 +142,7 @@ function App() {
         moveMap(latM, lngM, 15);
         addMarker([place]);
         nearbyPlaces(place);
-        sendEmail(place, "nicholaspribadi.1209@gmail.com");
+        // sendEmail(place, "nicholaspribadi.1209@gmail.com");
       });
     });
   };
@@ -118,23 +190,29 @@ function App() {
     setMarkers((prev) => [...prev, ...newMarkers]);
   };
 
-  let addRoute = (place) => {
-    console.log(place);
-    let routesSelected = routesArray;
-    routesSelected.push(place);
-    setRoutesArray([...routesSelected]);
-  };
-
-  let removeRoute = (place) =>{
-    let tmpArr = []
-    let routesSelected =  routesArray;
-    for( let i of routesSelected){
-      if (i !== place){
-        tmpArr.push(i);
+  let addRoute = async (place) => {
+    let tmp = [...routesArray];
+    for( let i of tmp){
+      if (place.id === i.id){
+        alert(`You're trying to add the same location!`)
+        return false
       }
     }
-    setRoutesArray(tmpArr)
+    setRoutesArray([...routesArray, place]);
+    await create(place)
+    
+  };
+
+  let removeRoute = async (place) =>{
+    const updatedRoutesArray = routesArray.filter(
+      (item) => item.id !== place.id
+    );
+    setRoutesArray(updatedRoutesArray);
+    await deletor(place)
+    
   }
+
+
 
 
   return (
