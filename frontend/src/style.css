@@ -58,7 +58,7 @@ body {
     /* Enable Flexbox within the containers */
     justify-content: center;
     /* Center the content horizontally */
-    align-items: center;
+    
     /* Center the content vertically */
     /*when minimizing, it would not be affected by the right had container*/
     min-width: 400px;

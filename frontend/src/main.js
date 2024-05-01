@@ -251,76 +251,78 @@ function App() {
   return (
     <div>
       <div className="main_container">
-      <APIProvider apiKey={YOUR_API_KEY}>
-        <div className="subcontainer-1">
-          <Map
-            center={position}
-            zoom={zoom}
-            id={"maps"}
-            onZoomChanged={(z) => {
-              setPosition(z.detail.center);
-              setZoom(z.detail.zoom);
-            }}
-            onCenterChanged={(z) => {
-              setPosition(z.detail.center);
-              setZoom(z.detail.zoom);
-            }}
-            className="subcontainer-1"
-          >
-            {markers.map((el) => (
-              <Marker key={el.key} position={el.position}></Marker>
-            ))}
-          </Map>
-        </div>
-      </APIProvider>
-
-      <div className="subcontainer-2">
-        <form id="searchBox" className="searchplace_bar">
-          <div id="lol"></div>
-          <input
-            name="searchMain"
-            type="text"
-            placeholder="Search for Places"
-            value={searchValue}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
-          />
-          <button
-            id="searchButton"
-            type="button"
-            style={{ fontSize: "17px", color: "black" }}
-            className="search"
-            onClick={searchPlaces}
-          >
-            <i className="fa fa-search"></i>
-          </button>
-          {/* The refresh button code is commented out, just like in your original HTML */}
-        </form>
-        <div className="recommended_places">
-          {allPlaceArray.map((el) => (
-            <div
-              id="place1"
-              className="box"
-              style={{
-                backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
-                backgroundRepeat: "no-repeat",
+      <div className="subcontainer-1">
+        <APIProvider apiKey={YOUR_API_KEY}>
+          
+            <Map
+              center={position}
+              zoom={zoom}
+              id={"maps"}
+              onZoomChanged={(z) => {
+                setPosition(z.detail.center);
+                setZoom(z.detail.zoom);
               }}
+              onCenterChanged={(z) => {
+                setPosition(z.detail.center);
+                setZoom(z.detail.zoom);
+              }}
+              className="subcontainer-1"
             >
-              <div className="place_name">
-                <p id="name-place1">{el["displayName"]}</p>
-                <button
-                  onClick={() => {
-                    addRoute(el);
-                  }}
-                  style={{ fontSize: "20px" }}
-                >
-                  <i className="fa fa-plus"> </i>
-                </button>
-              </div>
-            </div>
-          ))}
+              {markers.map((el) => (
+                <Marker key={el.key} position={el.position}></Marker>
+              ))}
+            </Map>
+          
+        </APIProvider>
         </div>
-      </div>
+
+        <div className="subcontainer-2">
+          <form id="searchBox" className="searchplace_bar">
+            <div id="lol"></div>
+            <input
+              name="searchMain"
+              type="text"
+              placeholder="Search for Places"
+              value={searchValue}
+              onChange={handleInputChange}
+              onKeyPress={handleKeyPress}
+            />
+            <button
+              id="searchButton"
+              type="button"
+              style={{ fontSize: "17px", color: "black" }}
+              className="search"
+              onClick={searchPlaces}
+            >
+              <i className="fa fa-search"></i>
+            </button>
+            {/* The refresh button code is commented out, just like in your original HTML */}
+          </form>
+          <div className="recommended_places">
+            {allPlaceArray.map((el) => (
+              <div
+                id="place1"
+                className="box"
+                style={{
+                  backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div className="place_name">
+                  <p id="name-place1">{el["displayName"]}</p>
+                  <button
+                    onClick={() => {
+                      addRoute(el);
+                    }}
+                    style={{ fontSize: "20px" }}
+                  >
+                    <i className="fa fa-plus"> </i>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="submain_container">
         <div className="day_count">Itinerary</div>
@@ -350,7 +352,6 @@ function App() {
           ))}
         </div>
       </div>
-    
     </div>
   );
 }
