@@ -248,12 +248,26 @@ function App() {
     }
   };
 
+  function getScrollAmount() {
+    // Adjust scroll amount based on viewport width
+    return window.innerWidth <= 768 ? 100 : 200;
+  }
+
+  function scrollLeft() {
+    const container = document.querySelector(".flex-container");
+    container.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
+  }
+
+  function scrollRight() {
+    const container = document.querySelector(".flex-container");
+    container.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
+  }
+
   return (
     <div>
       <div className="main_container">
-      <div className="subcontainer-1">
-        <APIProvider apiKey={YOUR_API_KEY}>
-          
+        <div className="subcontainer-1">
+          <APIProvider apiKey={YOUR_API_KEY}>
             <Map
               center={position}
               zoom={zoom}
@@ -272,8 +286,7 @@ function App() {
                 <Marker key={el.key} position={el.position}></Marker>
               ))}
             </Map>
-          
-        </APIProvider>
+          </APIProvider>
         </div>
 
         <div className="subcontainer-2">
