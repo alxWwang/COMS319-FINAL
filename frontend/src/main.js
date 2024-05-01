@@ -8,7 +8,7 @@ import {
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 import { Loader } from "@googlemaps/js-api-loader";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css"; //BUTTON ICON
 
 const YOUR_API_KEY = "AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"; // Replace with your actual API key
 
@@ -242,14 +242,15 @@ function App() {
 
   // Handler to execute search on pressing Enter
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       event.preventDefault(); // Prevent the form from being submitted
       searchPlaces();
     }
   };
 
   return (
-    <div className="main_container">
+    <div>
+      <div className="main_container">
       <APIProvider apiKey={YOUR_API_KEY}>
         <div className="subcontainer-1">
           <Map
@@ -273,33 +274,28 @@ function App() {
         </div>
       </APIProvider>
 
-      <div  className="subcontainer-2"> 
-        
-      <form id="searchBox" className="searchplace_bar">
-      <div id="lol"></div>
-      <input
-        name="searchMain"
-        type="text"
-        placeholder="Search for Places"
-        value={searchValue}
-        onChange={handleInputChange}
-        onKeyPress={handleKeyPress}
-      />
-      <button
-        id="searchButton"
-        type="button"
-        style={{ fontSize: '17px', color: 'black' }}
-        className="search"
-        onClick={searchPlaces}
-      >
-        <i className="fa fa-search"></i>
-      </button>
-      {/* The refresh button code is commented out, just like in your original HTML */}
-    </form>
-
-      
-        {/* <button onClick={searchPlaces}>Search</button> */}
-
+      <div className="subcontainer-2">
+        <form id="searchBox" className="searchplace_bar">
+          <div id="lol"></div>
+          <input
+            name="searchMain"
+            type="text"
+            placeholder="Search for Places"
+            value={searchValue}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+          />
+          <button
+            id="searchButton"
+            type="button"
+            style={{ fontSize: "17px", color: "black" }}
+            className="search"
+            onClick={searchPlaces}
+          >
+            <i className="fa fa-search"></i>
+          </button>
+          {/* The refresh button code is commented out, just like in your original HTML */}
+        </form>
         <div className="recommended_places">
           {allPlaceArray.map((el) => (
             <div
@@ -318,14 +314,14 @@ function App() {
                   }}
                   style={{ fontSize: "20px" }}
                 >
-                  <i className="fa fa-plus"> +</i>
+                  <i className="fa fa-plus"> </i>
                 </button>
               </div>
             </div>
           ))}
         </div>
       </div>
-
+      </div>
       <div className="submain_container">
         <div className="day_count">Itinerary</div>
         <div className="placeAdd" style={{ scrollbarWidth: "none" }}>
@@ -354,6 +350,7 @@ function App() {
           ))}
         </div>
       </div>
+    
     </div>
   );
 }

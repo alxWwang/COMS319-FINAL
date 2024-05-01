@@ -9,8 +9,13 @@ export const currentViewContext=createContext();
 function Website() {
     const[currentView, setCurrentView] = useState(0);
 
+    const appStyle = {
+    
+        justifyContent: 'space-between' // Ensures that the footer pushes to the bottom
+      };
+
   return (
-    <>
+    <div style={appStyle}>
     <currentViewContext.Provider value={{currentView, setCurrentView}}>
     <Header/>
     {currentView === 0 && <App/>}
@@ -18,7 +23,7 @@ function Website() {
     {currentView === 2 && <Tutorial />}
     </currentViewContext.Provider>
     <Footer/>
-    </>
+    </div>
   );
 }
 export default Website;
