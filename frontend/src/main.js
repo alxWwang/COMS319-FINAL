@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./style.css";
 import {
   APIProvider,
   Map,
@@ -21,7 +22,6 @@ function App() {
   const [routesArray, setRoutesArray] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
-
   useEffect(() => {
     console.log("allPlace: ", allPlaceArray);
   }, [allPlaceArray]);
@@ -30,36 +30,31 @@ function App() {
     console.log("routesArray: ", routesArray);
   }, [routesArray]);
 
+  let loadRoutes = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/getRoute");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
 
-  
+      // Check if the data is as expected (e.g., an array of routes)
+      if (!Array.isArray(data)) {
+        throw new Error("Unexpected response format");
+      }
 
+      console.log("Data received:", data);
 
-let loadRoutes = async () => {
-  try {
-    const response = await fetch('http://localhost:3000/getRoute');
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      setRoutesArray(data);
+    } catch (error) {
+      console.error("Error loading routes:", error);
+      alert("Failed to load routes. Please try again later.");
     }
-    const data = await response.json();
+  };
 
-    // Check if the data is as expected (e.g., an array of routes)
-    if (!Array.isArray(data)) {
-      throw new Error('Unexpected response format');
-    }
-
-    console.log('Data received:', data);
-
-    setRoutesArray(data);
-
-  } catch (error) {
-    console.error('Error loading routes:', error);
-    alert('Failed to load routes. Please try again later.');
-  }
-};
-
-  useEffect(()=>{
-    loadRoutes()
-  }, [])
+  useEffect(() => {
+    loadRoutes();
+  }, []);
 
   let create = (data) => {
     fetch("http://localhost:3000/addRoute", {
@@ -70,7 +65,9 @@ let loadRoutes = async () => {
       .then((response) => response.json())
       .then(async (data) => {
         console.log("Success:", data);
-        alert("Items added successfully!, pls click the View All button to see your added items")
+        alert(
+          "Items added successfully!, pls click the View All button to see your added items"
+        );
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -192,104 +189,104 @@ let loadRoutes = async () => {
 
   let addRoute = async (place) => {
     let tmp = [...routesArray];
-    for( let i of tmp){
-      if (place.id === i.id){
-        alert(`You're trying to add the same location!`)
-        return false
+    for (let i of tmp) {
+      if (place.id === i.id) {
+        alert(`You're trying to add the same location!`);
+        return false;
       }
     }
     setRoutesArray([...routesArray, place]);
-    await create(place)
-    
+    await create(place);
   };
 
-  let removeRoute = async (place) =>{
+  let removeRoute = async (place) => {
     const updatedRoutesArray = routesArray.filter(
       (item) => item.id !== place.id
     );
     setRoutesArray(updatedRoutesArray);
-    await deletor(place)
-    
-  }
-
-
-
+    await deletor(place);
+  };
 
   return (
-    <div>
-      <APIProvider apiKey={YOUR_API_KEY} className="main_container">
-        <Map
-          center={position}
-          zoom={zoom}
-          id={"maps"}
-          onZoomChanged={(z) => {
-            setPosition(z.detail.center);
-            setZoom(z.detail.zoom);
-          }}
-          onCenterChanged={(z) => {
-            setPosition(z.detail.center);
-            setZoom(z.detail.zoom);
-          }}
-          className="subcontainer-1"
-        >
-          {markers.map((el) => (
-            <Marker key={el.key} position={el.position}></Marker>
-          ))}
-        </Map>
+    <div className="main_container">
+      <APIProvider apiKey={YOUR_API_KEY}>
+        <div className="subcontainer-1">
+          <Map
+            center={position}
+            zoom={zoom}
+            id={"maps"}
+            onZoomChanged={(z) => {
+              setPosition(z.detail.center);
+              setZoom(z.detail.zoom);
+            }}
+            onCenterChanged={(z) => {
+              setPosition(z.detail.center);
+              setZoom(z.detail.zoom);
+            }}
+            className="subcontainer-1"
+          >
+            {markers.map((el) => (
+              <Marker key={el.key} position={el.position}></Marker>
+            ))}
+          </Map>
+        </div>
       </APIProvider>
 
-      <button onClick={searchPlaces}>Search</button>
+      <div  className="subcontainer-2"> 
+        <button onClick={searchPlaces}>Search</button>
 
-      <div className="recommended_places">
-        {allPlaceArray.map((el) => (
-          <div
-            id="place1"
-            className="box"
-            style={{
-              backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-            <div className="place_name">
-              <p id="name-place1">{el["displayName"]}</p>
-              <button
-                onClick={() => {
-                  addRoute(el);
-                }}
-                style={{ fontSize: "20px" }}
-              >
-                <i className="fa fa-plus"> +</i>
-              </button>
+        <div className="recommended_places">
+          {allPlaceArray.map((el) => (
+            <div
+              id="place1"
+              className="box"
+              style={{
+                backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="place_name">
+                <p id="name-place1">{el["displayName"]}</p>
+                <button
+                  onClick={() => {
+                    addRoute(el);
+                  }}
+                  style={{ fontSize: "20px" }}
+                >
+                  <i className="fa fa-plus"> +</i>
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <div className="submain_container">
         <div className="day_count">Itinerary</div>
-        <div className="placeAdd" style={{scrollbarWidth: "none"}}>
-          {routesArray.map((el)=>(
-
+        <div className="placeAdd" style={{ scrollbarWidth: "none" }}>
+          {routesArray.map((el) => (
             <div className="item">
-            <div className="place-item" style={{
-              backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover'
-            }}>
-        
-              <div className="place-content">
-                <p>{el['displayName']}</p>
-                <button onClick={()=>{removeRoute(el)}}>
-                  <i>-</i>
-                </button>
+              <div
+                className="place-item"
+                style={{
+                  backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                }}
+              >
+                <div className="place-content">
+                  <p>{el["displayName"]}</p>
+                  <button
+                    onClick={() => {
+                      removeRoute(el);
+                    }}
+                  >
+                    <i>-</i>
+                  </button>
+                </div>
               </div>
             </div>
-            </div>
-
           ))}
-          
-
-          
         </div>
       </div>
     </div>

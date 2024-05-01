@@ -19,89 +19,7 @@ body {
 
 }
 
-/* ----------------------header----------------------------- */
 
-header {
-    background-image: linear-gradient(to right, rgba(172, 66, 255, 1), rgba(103, 40, 153, 1), rgba(96, 23, 154, 1), rgba(86, 7, 148, 1));
-    /* Replace with your navigation bar color */
-    height: 70px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    /* horizontal offset, vertical offset, blur radius, color */
-    display: flex;
-    justify-content: space-between;
-    /*push right and left and center */
-    align-items: center;
-    /*items inside will be align in center*/
-    min-width: 470px;
-    min-height: 50px;
-    margin-bottom: 50px;
-    position:sticky;
-}
-
-#name {
-    margin: 0px 20px;
-    color: white;
-
-}
-
-#horizontal_navigation ul {
-    list-style: none;
-    /*no bullet point */
-}
-
-#horizontal_navigation li {
-    display: inline-block;
-    /* go horizontal */
-    padding: 0px 20px;
-    /* top,button:0px, right left:20px */
-
-}
-
-#horizontal_navigation li a {
-    transition: all 0.3s ease 0s;
-}
-
-#horizontal_navigation li a:hover {
-    color: lightpink;
-    box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.2);
-}
-
-#cta_button {
-    margin: 0px 20px;
-    /*for the location in navigation*/
-    padding: 9px 10px;
-    /* PADDING size for button */
-    background-color: rgba(0, 136, 169, 1);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-#cta_button:hover {
-    background-color: rgba(169, 0, 0, 0.8);
-}
-
-/* ----------------------main container----------------------------- */
-
-.main_container {
-    display: flex;
-    /* Use Flexbox to layout the child divs */
-    max-width: 1500px;
-    border-radius: 10px;
-   
-    /* Set padding inside the outer container */
-    justify-content: space-around;
-    /* Distribute space around the inner containers */
-   
-    width: 100%;
-    height: 70vh;
-    /* Optional: Set the height to fill the viewport vertically */
-    margin-bottom: 50px;
-    
-
-
-}
 
 /* ----------------------main container-subcontainers---------------------------- */
 
@@ -425,25 +343,6 @@ p {
     margin: 10px;
 
 } */
-
-/* --------------footer--------------------- */
-
-footer {
-    margin-top: 100px;
-    background-image: linear-gradient(to right, rgba(172, 66, 255, 1), rgba(103, 40, 153, 1), rgba(96, 23, 154, 1), rgba(86, 7, 148, 1));
-    /* Replace with your navigation bar color */
-    height: 70px;
-    box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.5);
-    /* horizontal offset, vertical offset, blur radius, color */
-    display: flex;
-    min-width: 470px;
-    min-height: 200px;
-    justify-content: center;
-    align-items: center;
-    overflow:hidden;
-    flex-direction: row;
-
-}
 
 
 
