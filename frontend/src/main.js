@@ -247,7 +247,7 @@ function App() {
       searchPlaces();
     }
   };
-
+////////
   function getScrollAmount() {
     // Adjust scroll amount based on viewport width
     return window.innerWidth <= 768 ? 100 : 200;

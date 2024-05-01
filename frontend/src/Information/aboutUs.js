@@ -1,4 +1,6 @@
 import React, { useState,createContext } from "react";
+import Nic from '../pictures/gsnteng.jpg';
+import Annabelle from '../pictures/anabelle.jpeg';
 
 // Styles
 const styles = {
