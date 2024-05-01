@@ -8,6 +8,8 @@ import {
   useMapsLibrary,
 } from "@vis.gl/react-google-maps";
 import { Loader } from "@googlemaps/js-api-loader";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 const YOUR_API_KEY = "AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"; // Replace with your actual API key
 
 function App() {
