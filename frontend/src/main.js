@@ -123,26 +123,26 @@ function App() {
     setZoom(zoom);
   };
 
-  let searchPlaces = () => {
-    const req = {
-      textQuery: "Tugu Muda",
-      fields: ["displayName", "location", "businessStatus", "photos"],
-    };
+  // let searchPlaces = () => {
+  //   const req = {
+  //     textQuery: "Tugu Muda",
+  //     fields: ["displayName", "location", "businessStatus", "photos"],
+  //   };
 
-    let place = loader.importLibrary("places").then((el) => {
-      el.Place.searchByText(req).then((res) => {
-        let place = res["places"][0]["Fg"];
-        console.log(place);
-        place["photos"] = place["photos"][0];
-        let latM = place["location"]["lat"];
-        let lngM = place["location"]["lng"];
-        moveMap(latM, lngM, 15);
-        addMarker([place]);
-        nearbyPlaces(place);
-        // sendEmail(place, "nicholaspribadi.1209@gmail.com");
-      });
-    });
-  };
+  //   let place = loader.importLibrary("places").then((el) => {
+  //     el.Place.searchByText(req).then((res) => {
+  //       let place = res["places"][0]["Fg"];
+  //       console.log(place);
+  //       place["photos"] = place["photos"][0];
+  //       let latM = place["location"]["lat"];
+  //       let lngM = place["location"]["lng"];
+  //       moveMap(latM, lngM, 15);
+  //       addMarker([place]);
+  //       nearbyPlaces(place);
+  //       // sendEmail(place, "nicholaspribadi.1209@gmail.com");
+  //     });
+  //   });
+  // };
 
   let nearbyPlaces = (places) => {
     let latM = places["location"]["lat"];
@@ -207,6 +207,45 @@ function App() {
     await deletor(place);
   };
 
+  /////
+
+  const [searchValue, setSearchValue] = useState("Iowa State University");
+
+  // Handler for input change
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  // Handler for executing the search
+  const searchPlaces = () => {
+    const req = {
+      textQuery: "Tugu Muda",
+      fields: ["displayName", "location", "businessStatus", "photos"],
+    };
+
+    let place = loader.importLibrary("places").then((el) => {
+      el.Place.searchByText(req).then((res) => {
+        let place = res["places"][0]["Fg"];
+        console.log(place);
+        place["photos"] = place["photos"][0];
+        let latM = place["location"]["lat"];
+        let lngM = place["location"]["lng"];
+        moveMap(latM, lngM, 15);
+        addMarker([place]);
+        nearbyPlaces(place);
+        // sendEmail(place, "nicholaspribadi.1209@gmail.com");
+      });
+    });
+  };
+
+  // Handler to execute search on pressing Enter
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the form from being submitted
+      searchPlaces();
+    }
+  };
+
   return (
     <div className="main_container">
       <APIProvider apiKey={YOUR_API_KEY}>
@@ -233,7 +272,31 @@ function App() {
       </APIProvider>
 
       <div  className="subcontainer-2"> 
-        <button onClick={searchPlaces}>Search</button>
+        
+      <form id="searchBox" className="searchplace_bar">
+      <div id="lol"></div>
+      <input
+        name="searchMain"
+        type="text"
+        placeholder="Search for Places"
+        value={searchValue}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
+      />
+      <button
+        id="searchButton"
+        type="button"
+        style={{ fontSize: '17px', color: 'black' }}
+        className="search"
+        onClick={searchPlaces}
+      >
+        <i className="fa fa-search"></i>
+      </button>
+      {/* The refresh button code is commented out, just like in your original HTML */}
+    </form>
+
+      
+        {/* <button onClick={searchPlaces}>Search</button> */}
 
         <div className="recommended_places">
           {allPlaceArray.map((el) => (
