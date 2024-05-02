@@ -3,6 +3,7 @@ import Header from "./pageLayout/Header";
 import Footer from "./pageLayout/Footer";
 import AboutUs from "./Information/aboutUs";
 import Tutorial from "./Information/tutorial";
+import Email from "./Information/email";
 import React, { useState,createContext } from "react";
 export const currentViewContext=createContext();
 
@@ -21,7 +22,7 @@ function Website() {
     {currentView === 0 && <App/>}
     {currentView === 1 && <AboutUs />}
     {currentView === 2 && <Tutorial />}
-    {/* {currentView ===3 && <Email/>} */}
+    {currentView ===3 && <Email/>}
     </currentViewContext.Provider>
     <Footer/>
     </div>
