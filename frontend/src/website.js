@@ -21,6 +21,7 @@ function Website() {
     {currentView === 0 && <App/>}
     {currentView === 1 && <AboutUs />}
     {currentView === 2 && <Tutorial />}
+    {/* {currentView ===3 && <Email/>} */}
     </currentViewContext.Provider>
     <Footer/>
     </div>

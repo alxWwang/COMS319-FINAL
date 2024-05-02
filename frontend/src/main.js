@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import "./style.css";
 import {
   APIProvider,
@@ -9,6 +9,11 @@ import {
 } from "@vis.gl/react-google-maps";
 import { Loader } from "@googlemaps/js-api-loader";
 import "@fortawesome/fontawesome-free/css/all.min.css"; //BUTTON ICON
+// import { currentViewContext } from "./website";
+
+//onclick function
+// const { currentView, setCurrentView } = useContext(currentViewContext);
+  
 
 const YOUR_API_KEY = "AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"; // Replace with your actual API key
 
@@ -262,6 +267,11 @@ function App() {
     const container = document.querySelector(".flex-container");
     container.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
   }
+  ///////////
+  // const handleEmail = (e) => {
+  //   e.preventDefault(); // Prevents form submission or other default actions
+  //   setCurrentView(3);
+  // };
 
   return (
     <div>
@@ -364,7 +374,7 @@ function App() {
             </div>
           ))}
         </div>
-        <button id="cta_button" >Save</button>
+        <button id="cta_button"  >Save</button>
       </div>
       
       
