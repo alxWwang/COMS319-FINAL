@@ -18,6 +18,12 @@ function Email() {
     console.log(data.fullName); // log only fullname
   };
 
+  const handleHome = (e) => {
+    
+    e.preventDefault(); // Prevents form submission or other default actions
+    setCurrentView(0);
+  };
+
   return (
     <>
       <div>
@@ -48,7 +54,8 @@ function Email() {
               <p className="text-danger">{errors.email.message}</p>
             )}
           </div>
-          <button type="submit" className="btn btn-primary">
+          {/* after clicking submit will appear alert and go to map page */}
+          <button type="submit" className="btn btn-primary" onClick={handleHome}>
             Submit
           </button>
         </form>
