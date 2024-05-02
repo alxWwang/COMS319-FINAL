@@ -1,7 +1,11 @@
-import React, { useContext } from "react";
+import { useState } from "react";
+import React, { useContext }from "react";
 import { currentViewContext } from "../website";
 
+
 function Header() {
+    const [isHovered, setIsHovered] = useState(false);  // State to track hover
+
     const headerStyle = {
       backgroundImage:
         "linear-gradient(to right, rgba(172, 66, 255, 1), rgba(103, 40, 153, 1), rgba(96, 23, 154, 1), rgba(86, 7, 148, 1))",
@@ -36,7 +40,7 @@ function Header() {
     const buttonStyle = {
       margin: "0 20px",
       padding: "9px 10px",
-      backgroundColor: "rgba(0, 136, 169, 1)",
+      backgroundColor: isHovered ? "rgba(169, 0, 0, 0.8)" : "rgba(0, 136, 169, 1)",
       border: "none",
       borderRadius: "50px",
       cursor: "pointer",
@@ -86,7 +90,9 @@ function Header() {
           </ul>
         </nav>
   
-          <button id="cta_button" style={buttonStyle} onClick={handleAboutUs}>
+          <button id="cta_button" style={buttonStyle} 
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}onClick={handleAboutUs}>
             Contact Us
           </button>
         

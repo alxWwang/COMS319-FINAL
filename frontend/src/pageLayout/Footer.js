@@ -13,6 +13,7 @@ const Footer = () => {
     alignItems: 'center',
     overflow: 'hidden',
     flexDirection: 'row'
+
   };
 
   const contactStyle = {
@@ -21,7 +22,7 @@ const Footer = () => {
     margin: '10px',
     padding: '5px'
   };
-
+  
   return (
     <footer style={footerStyle}>
       <section id="contact1" className="contact" style={contactStyle}>

@@ -354,6 +354,25 @@ p {
     border-radius: 10px;
 }
 
+#cta_button {
+    
+    border-radius: 15px;
+    padding: 10px 20px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 20px;
+    margin-top:auto;
+    max-width: max-content;
+    transition: all 0.3s ease 0s;
+}
+
+#cta_button:hover {
+    background-color: rgba(169, 0, 0, 0.8);
+}
+
+
 /* ----------dustbin button-------- */
 /* .dustbin {
     background-color: blueviolet;
