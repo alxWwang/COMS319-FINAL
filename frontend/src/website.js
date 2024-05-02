@@ -11,6 +11,9 @@ function Website() {
     const[currentView, setCurrentView] = useState(0);
 
     const appStyle = {
+        display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh', // Use 100vh to take full height of the viewport
     
         justifyContent: 'space-between' // Ensures that the footer pushes to the bottom
       };
