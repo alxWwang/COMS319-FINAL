@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { currentViewContext } from "../website";
 
@@ -24,11 +24,26 @@ function Email() {
     setCurrentView(0);
   };
 
+  const fillInStyle={
+    margin:'10px',
+  };
+
+  const [isHovered, setIsHovered] = useState(false);  // State to track hover
+
+  const buttonStyle = {
+    margin: "0 20px",
+    padding: "9px 10px",
+    backgroundColor: isHovered ? "rgba(169, 0, 0, 0.8)" : "rgba(0, 136, 169, 1)",
+    border: "none",
+    cursor: "pointer",
+    transition: "all 0.3s ease 0s",
+  };
+
   return (
     <>
       <div>
         <form onSubmit={handleSubmit(onSubmit)} className="container mt-5">
-          <div className="form-group">
+          <div className="form-group " style={fillInStyle}>
             <input
               {...register("fullName", { required: true })}
               placeholder="Full Name"
@@ -38,7 +53,7 @@ function Email() {
               <p className="text-danger">Full Name is required.</p>
             )}
           </div>
-          <div className="form-group">
+          <div className="form-group" style={fillInStyle}>
             <input
               {...register("email", {
                 required: "Email is required", // Provide a message directly for the 'required' rule
@@ -55,7 +70,9 @@ function Email() {
             )}
           </div>
           {/* after clicking submit will appear alert and go to map page */}
-          <button type="submit" className="btn btn-primary" onClick={handleHome}>
+          <button type="submit" className="btn btn-primary" onClick={handleHome} style={buttonStyle}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}>
             Submit
           </button>
         </form>
