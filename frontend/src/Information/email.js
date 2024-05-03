@@ -14,8 +14,33 @@ function Email() {
   const { currentView, setCurrentView } = useContext(currentViewContext);
 
   const onSubmit = (data) => {
+    console.log("Email submitted", data);
     console.log(data); // log all data
     console.log(data.fullName); // log only fullname
+
+    sendEmail(data.fullName, data.email)
+  };
+
+
+  const sendEmail = async (name, addy) => {
+    const data = { name, email: addy }; // Your JSON object
+    try {
+      const response = await fetch("http://localhost:3000/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      // Handle success
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle error
+    }
   };
 
   const handleHome = (e) => {
@@ -70,7 +95,7 @@ function Email() {
             )}
           </div>
           {/* after clicking submit will appear alert and go to map page */}
-          <button type="submit" className="btn btn-primary" onClick={handleHome} style={buttonStyle}
+          <button type="submit" className="btn btn-primary"  style={buttonStyle}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}>
             Submit

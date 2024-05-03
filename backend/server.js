@@ -67,32 +67,67 @@ app.post('/addRoute', async(req,res)=>{
   }
 })
 
-app.post('/sendEmail', (req,res)=>{
+app.post('/sendEmail', async (req,res)=>{
     console.log("function executed")
-    const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    host: 'smtp.gmail.com',
-    port: 465,
-    auth: {
-        user: 'nicholaspribadi.1209@gmail.com',
-        pass: 'nrvn dlym qpyr wfjr'
+    try{
+      await client.connect()
+      console.log('connected to mongodb')
+      const results = await db.collection('routes').find({}).toArray()
+      console.log(results)
+      res.status(200)
+      res.send(results)
+
+      const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
+        auth: {
+            user: 'nicholaspribadi.1209@gmail.com',
+            pass: 'nrvn dlym qpyr wfjr'
+        }
+        });
+        console.log(req.body)
+
+        let htmlContent = "<b>This is from the JS Server. Selected: </b>";
+
+        results.forEach((el)=>{
+          htmlContent += `
+          <div><strong>${el.displayName}</strong></div>`;
+        })
+
+        console.log(htmlContent)
+
+
+
+        async function main(){
+            const info = await transporter.sendMail({
+            from: '"Mappy" <93coms319@gmail.com>', // sender address
+            to: `<${req.body['email']}>`, // list of receivers
+            subject: `Hello ${req.body['name']}`, // Subject line
+            text: "Test Email", // plain text body
+            html: htmlContent, // html body
+        });
+        
+    
+        console.log("Message sent: %s", info.messageId);
+      }
+    
+        main().catch(console.error)
+    
+    
+      res.sendStatus(200)
+
+
+
+    }catch(error){
+      console.error("An error occured: ", error)
+    }finally{
+      await client.close()
     }
-    });
-    console.log(req.body)
-    async function main(){
-        const info = await transporter.sendMail({
-        from: '"Mappy" <93coms319@gmail.com>', // sender address
-        to: `Hello <${req.body['email']}>`, // list of receivers
-        subject: "Testing nodemailer", // Subject line
-        text: "Test Email", // plain text body
-        html: `<b>This is from the js Server. Selected: ${req.body['displayName']}, To: ${req.body['email']}</b>`, // html body
-    });
-
-    console.log("Message sent: %s", info.messageId);
-  }
-
-    //main().catch(console.error)
 
 
-  res.sendStatus(200)
+
+
+
+    
 })

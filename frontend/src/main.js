@@ -28,13 +28,13 @@ function App() {
   const [routesArray, setRoutesArray] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
-  useEffect(() => {
-    console.log("allPlace: ", allPlaceArray);
-  }, [allPlaceArray]);
+  // useEffect(() => {
+  //   console.log("allPlace: ", allPlaceArray);
+  // }, [allPlaceArray]);
 
-  useEffect(() => {
-    console.log("routesArray: ", routesArray);
-  }, [routesArray]);
+  // useEffect(() => {
+  //   console.log("routesArray: ", routesArray);
+  // }, [routesArray]);
 
   let loadRoutes = async () => {
     try {
@@ -49,7 +49,7 @@ function App() {
         throw new Error("Unexpected response format");
       }
 
-      console.log("Data received:", data);
+      // console.log("Data received:", data);
 
       setRoutesArray(data);
     } catch (error) {
@@ -77,7 +77,6 @@ function App() {
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("Failed to add items");
       });
   };
 
@@ -103,26 +102,7 @@ function App() {
     }
   };
 
-  const sendEmail = async (places, addy) => {
-    const data = { places, email: addy }; // Your JSON object
-    try {
-      const response = await fetch("http://localhost:3000/sendEmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      // Handle success
-    } catch (error) {
-      console.error("Error:", error);
-      // Handle error
-    }
-  };
 
   let moveMap = (lat, lng, zoom) => {
     setPosition({ lat: lat, lng: lng });
@@ -225,7 +205,7 @@ function App() {
   // Handler for executing the search
   const searchPlaces = () => {
     const req = {
-      textQuery: "Tugu Muda",
+      textQuery: searchValue,
       fields: ["displayName", "location", "businessStatus", "photos"],
     };
 
@@ -321,59 +301,79 @@ function App() {
             {/* The refresh button code is commented out, just like in your original HTML */}
           </form>
           <div className="recommended_places">
-            {allPlaceArray.map((el) => (
-              <div
-                id="place1"
-                className="box"
-                style={{
-                  backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
-                  backgroundRepeat: "no-repeat",
-                }}
-              >
-                <div className="place_name">
-                  <p id="name-place1">{el["displayName"]}</p>
-                  <button
-                    onClick={() => {
-                      addRoute(el);
-                    }}
-                    style={{ fontSize: "20px" }}
-                  >
-                    <i className="fa fa-plus"> </i>
-                  </button>
+            {allPlaceArray.map((el) => {
+              let url = "";
+              if (el["photos"] === undefined) {
+                url = "";
+              } else {
+                url = `"https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"`;
+              }
+
+              return (
+                <div
+                  id="place1"
+                  className="box"
+                  style={{
+                    backgroundImage: `url(${url})`,
+                    backgroundRepeat: "no-repeat",
+                  }}
+                >
+                  <div className="place_name">
+                    <p id="name-place1">{el["displayName"]}</p>
+                    <button
+                      onClick={() => {
+                        addRoute(el);
+                      }}
+                      style={{ fontSize: "20px" }}
+                    >
+                      <i className="fa fa-plus"> </i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
       <div className="submain_container">
         <div className="day_count">Itinerary</div>
         <div className="placeAdd" style={{ scrollbarWidth: "none" }}>
-          {routesArray.map((el) => (
-            <div className="item">
-              <div
-                className="place-item"
-                style={{
-                  backgroundImage: `url("https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                }}
-              >
-                <div className="place-content">
-                  <p>{el["displayName"]}</p>
-                  <button
-                    onClick={() => {
-                      removeRoute(el);
-                    }}
-                  >
-                    <i>-</i>
-                  </button>
+          {routesArray.map((el) => {
+            let url = "";
+            if (el["photos"] === undefined) {
+              url = "";
+            } else {
+              url = `"https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"`;
+            }
+
+            return (
+              <div className="item">
+                <div
+                  className="place-item"
+                  style={{
+                    backgroundImage: `url(${url})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                  }}
+                >
+                  <div className="place-content">
+                    <p>{el["displayName"]}</p>
+                    <button
+                      onClick={() => {
+                        removeRoute(el);
+                      }}
+                    >
+                      <i>-</i>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
-        <button id="cta_button" onClick={handleEmail}>Save</button>
+        <button id="cta_button" onClick={handleEmail}>
+          Save
+        </button>
       </div>
     </div>
   );
