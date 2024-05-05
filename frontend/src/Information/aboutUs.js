@@ -82,7 +82,7 @@ return(
             SE/ComS319 Construction of User Interfaces, Spring 2024
           </h2>
           <h3 style={styles.date}>
-            Date: 03-09-2024
+            Date: 05-05-2024
           </h3>
         </section>
 

@@ -17,23 +17,26 @@ const Footer = () => {
   };
 
   const contactStyle = {
-    color: 'white', // Assuming you want the text in white
     textAlign: 'center',
-    margin: '10px',
+    margin: '50px',
     padding: '5px'
   };
+
+  const paragraphStyle={
+    color: 'white', 
+  }
   
   return (
     <footer style={footerStyle}>
       <section id="contact1" className="contact" style={contactStyle}>
-        <p>Phone: +1 (515) 815-4987</p>
-        <p>Email: nawang2@iastate.edu</p>
-        <p>Instagram: alx__wang</p>
+        <p style={paragraphStyle}>Phone: 1 (515) 815-4987</p>
+        <p style={paragraphStyle}>Email: nawang2@iastate.edu</p>
+        <p style={paragraphStyle}>Instagram: alx__wang</p>
       </section>
       <section id="contact2" className="contact" style={contactStyle}>
-        <p>Phone: +1 (515) 520-5750</p>
-        <p>Email: belle27@iastate.edu</p>
-        <p>Instagram: yiyunkhor</p>
+        <p style={paragraphStyle}>Phone: 1 (515) 520-5750</p>
+        <p style={paragraphStyle}>Email: belle27@iastate.edu</p>
+        <p style={paragraphStyle}>Instagram: yiyunkhor</p>
       </section>
     </footer>
   );

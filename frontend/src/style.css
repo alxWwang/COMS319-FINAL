@@ -262,15 +262,18 @@ p {
 
 .time-item {
     height: 40px;
+
     margin-bottom:5px;
     border-radius: 5px;
     
 }
 
 .place-item {
+    
     display:flex;
     flex-direction: column;
     height: 160px; 
+    width: 160px;
     border-radius: 5px;
     justify-content: center;
     align-items: center;
@@ -371,19 +374,6 @@ p {
 #cta_button:hover {
     background-color: rgba(169, 0, 0, 0.8);
 }
-
-
-/* ----------dustbin button-------- */
-/* .dustbin {
-    background-color: blueviolet;
-    border-radius: 5px;
-    height: 50px;
-    width: 50px;
-    margin: 10px;
-
-} */
-
-
 
 /* Media query for smaller screens */
 @media (max-width: 950px) {
