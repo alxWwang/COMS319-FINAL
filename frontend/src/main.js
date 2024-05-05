@@ -94,14 +94,11 @@ function App() {
     }
   };
 
-
-
   let moveMap = (lat, lng, zoom) => {
     setPosition({ lat: lat, lng: lng });
     setZoom(zoom);
   };
 
-  
   let nearbyPlaces = (places) => {
     let latM = places["location"]["lat"];
     let lngM = places["location"]["lng"];
