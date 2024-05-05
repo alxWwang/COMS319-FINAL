@@ -82,8 +82,8 @@ app.post('/sendEmail', async (req,res)=>{
         host: 'smtp.gmail.com',
         port: 465,
         auth: {
-            user: 'nicholaspribadi.1209@gmail.com',
-            pass: 'nrvn dlym qpyr wfjr'
+            user: '93coms319@gmail.com',
+            pass: 'ssbv hwdr iqlh wyay'
         }
         });
         console.log(req.body)
@@ -91,11 +91,41 @@ app.post('/sendEmail', async (req,res)=>{
         let htmlContent = "<b>This is from the JS Server. Selected: </b>";
 
         results.forEach((el)=>{
-          htmlContent += `
-          <div><strong>${el.displayName}</strong></div>`;
-        })
 
-        console.log(htmlContent)
+          let url = "";
+              if (el.photos === undefined) {
+                url = "";
+              } else {
+                url = `https://places.googleapis.com/v1/${el.photos.name}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44`;
+              }
+              console.log(url)
+              console.log()
+
+          htmlContent += `
+
+          <div>
+          <div
+        style="
+          background-image: url(${url});
+          background-repeat: no-repeat;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: calc(33.333% - 10px);
+          border-radius: 10px;
+          min-width: 110px;
+          min-height: 150px;
+          cursor: pointer;
+          transition: all 0.3s ease 0s;
+          overflow: hidden;
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          background-size: cover;
+          background-color: rgba(217, 217, 217, 1);
+        "
+      ></div>
+            <strong>${el.displayName}</strong>
+          </div>`;
+        })
 
 
 

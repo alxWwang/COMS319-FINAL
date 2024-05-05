@@ -88,7 +88,7 @@ return(
 
         <section id="about">
           <div style={styles.container}>
-            <img src="pictures/gsnteng.jpg" alt="Profile Photo" style={styles.profileImg} />
+            <img src={Nic} alt="Profile Photo" style={styles.profileImg} />
             <h1>Nicholas Wang</h1>
             <p style={styles.profileInfo}>
               Web Developer
@@ -104,7 +104,7 @@ return(
 
         <section id="about">
           <div style={styles.container}>
-            <img src="pictures/anabelle.jpeg" alt="Profile Photo" style={styles.profileImg} />
+            <img src={Annabelle} alt="Profile Photo" style={styles.profileImg} />
             <h1>Yi Yun Khor</h1>
             <p style={styles.profileInfo}>
               UI Developer
