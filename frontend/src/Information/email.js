@@ -17,8 +17,8 @@ function Email() {
     console.log("Email submitted", data);
     console.log(data); // log all data
     console.log(data.fullName); // log only fullname
-
     sendEmail(data.fullName, data.email)
+   
   };
 
 
@@ -36,6 +36,7 @@ function Email() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+    
       // Handle success
     } catch (error) {
       console.error("Error:", error);

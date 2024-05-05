@@ -113,8 +113,8 @@ app.post('/sendEmail', async (req,res)=>{
                 align-items: center;
                 width: calc(33.333% - 10px);
                 border-radius: 10px;
-                min-width: 110px;
-                min-height: 150px;
+                min-width: 200px;
+                min-height: 300px;
                 cursor: pointer;
                 transition: all 0.3s ease 0s;
                 overflow: hidden;
@@ -135,9 +135,6 @@ app.post('/sendEmail', async (req,res)=>{
         <li> Uncheck the Don't download pictures automatically in HTML email messages or RSS items option</li>
       </ul>
         `
-
-
-
         async function main(){
             const info = await transporter.sendMail({
             from: '"Mappy" <93coms319@gmail.com>', // sender address
@@ -146,22 +143,23 @@ app.post('/sendEmail', async (req,res)=>{
             text: "Test Email", // plain text body
             html: htmlContent, // html body
         });
-        
     
         console.log("Message sent: %s", info.messageId);
+
+       
       }
-    
         main().catch(console.error)
-    
-    
+       
       res.sendStatus(200)
-
-
+      
+      
 
     }catch(error){
       console.error("An error occured: ", error)
     }finally{
       await client.close()
+      
+
     }
 
 
