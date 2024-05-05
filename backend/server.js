@@ -26,8 +26,10 @@ app.get("/getRoute", async (req, res) => {
   try {
     await client.connect();
     console.log("connected to mongodb");
+
     const results = await db.collection("routes").find({}).toArray();
     console.log(results);
+
     res.status(200);
     res.send(results);
   } catch (error) {
@@ -40,9 +42,12 @@ app.get("/getRoute", async (req, res) => {
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
   console.log(`deleting ${id}`);
+
   await client.connect();
   console.log("connected to mongodb");
+
   const coll = await db.collection("routes").deleteOne({ id: id });
+
   if (coll.deletedCount === 0) {
     console.log("no such document found");
   } else {
@@ -54,8 +59,10 @@ app.post("/addRoute", async (req, res) => {
   try {
     await client.connect();
     console.log("connected to mongodb");
+
     const coll = await db.collection("routes").insertOne(req.body);
     console.log("Document inserted");
+
   } catch (error) {
     console.error("An error occured: ", error);
   } finally {
@@ -68,10 +75,9 @@ app.post("/sendEmail", async (req, res) => {
   try {
     await client.connect();
     console.log("connected to mongodb");
+
     const results = await db.collection("routes").find({}).toArray();
     console.log(results);
-    res.status(200);
-    res.send(results);
 
     const transporter = nodemailer.createTransport({
       service: "Gmail",
