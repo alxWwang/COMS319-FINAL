@@ -104,28 +104,37 @@ app.post('/sendEmail', async (req,res)=>{
           htmlContent += `
 
           <div>
-          <div
-        style="
-          background-image: url(${url});
-          background-repeat: no-repeat;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: calc(33.333% - 10px);
-          border-radius: 10px;
-          min-width: 110px;
-          min-height: 150px;
-          cursor: pointer;
-          transition: all 0.3s ease 0s;
-          overflow: hidden;
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-          background-size: cover;
-          background-color: rgba(217, 217, 217, 1);
-        "
-      ></div>
+            <div
+              style="
+                background-image: url(${url});
+                background-repeat: no-repeat;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: calc(33.333% - 10px);
+                border-radius: 10px;
+                min-width: 110px;
+                min-height: 150px;
+                cursor: pointer;
+                transition: all 0.3s ease 0s;
+                overflow: hidden;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                background-size: cover;
+                background-color: rgba(217, 217, 217, 1);
+              "
+            ></div>
             <strong>${el.displayName}</strong>
           </div>`;
         })
+        htmlContent += `
+        <div> To enable pictures: </div>
+      <ul>
+        <li> Open Trust Center</li>
+        <li> Open Trust Center Settings</li>
+        <li> Select Automatic Download</li>
+        <li> Uncheck the Don't download pictures automatically in HTML email messages or RSS items option</li>
+      </ul>
+        `
 
 
 
