@@ -26,7 +26,7 @@ function Email() {
     const data = { name, email: addy }; // Your JSON object
     try {
       const response = await fetch("http://localhost:3000/sendEmail", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

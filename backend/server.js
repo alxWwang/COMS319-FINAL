@@ -62,7 +62,6 @@ app.post("/addRoute", async (req, res) => {
 
     const coll = await db.collection("routes").insertOne(req.body);
     console.log("Document inserted");
-
   } catch (error) {
     console.error("An error occured: ", error);
   } finally {
@@ -70,7 +69,7 @@ app.post("/addRoute", async (req, res) => {
   }
 });
 
-app.post("/sendEmail", async (req, res) => {
+app.put("/sendEmail", async (req, res) => {
   console.log("function executed");
   try {
     await client.connect();
@@ -89,6 +88,28 @@ app.post("/sendEmail", async (req, res) => {
       },
     });
     console.log(req.body);
+
+
+    const email = req.body['email'];
+    const query = { email: email };
+
+    const updateData = {
+      $set: {
+        name: req.body.name,
+      },
+    };
+    
+    const user = await db.collection("email").findOne(query);
+    console.log(user)
+    if (user == null){
+      const coll = await db.collection("email").insertOne(req.body);
+      console.log("Document inserted");
+    }
+    // Add options if needed, for example { upsert: true } to create a document if it doesn't exist
+    const options = {};
+    const results2 = await db
+      .collection("email")
+      .updateOne(query, updateData, options);
 
     let htmlContent = "<b>This is from the JS Server. Selected: </b>";
 
