@@ -53,6 +53,7 @@ app.delete("/delete/:id", async (req, res) => {
   if (coll.deletedCount === 0) {
     console.log("no such document found");
   } else {
+    res.status(200)
     console.log("document deleted successfully!");
   }
 });
@@ -65,6 +66,7 @@ app.post("/addRoute", async (req, res) => {
 
     const coll = await db.collection("routes").insertOne(req.body);
     console.log("Document inserted");
+    res.status(200)
   } catch (error) {
     console.error("An error occured: ", error);
   } finally {
