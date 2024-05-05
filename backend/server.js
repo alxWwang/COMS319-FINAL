@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const url = "mongodb://localhost:27017";
-const dbName = "mappyDB";
+const dbName = "mappyDB";//database name
 
 const client = new MongoClient(url);
 const db = client.db(dbName);
@@ -21,6 +21,7 @@ app.listen(port, () => {
   console.log("app listening at http://%s:%s", host, port);
 });
 
+//loads all route in the itineary
 app.get("/getRoute", async (req, res) => {
   console.log("gettingRoute");
   try {
@@ -39,6 +40,7 @@ app.get("/getRoute", async (req, res) => {
   }
 });
 
+//delete mongodb 
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
   console.log(`deleting ${id}`);
@@ -55,6 +57,7 @@ app.delete("/delete/:id", async (req, res) => {
   }
 });
 
+//add route
 app.post("/addRoute", async (req, res) => {
   try {
     await client.connect();
@@ -69,6 +72,7 @@ app.post("/addRoute", async (req, res) => {
   }
 });
 
+//update email or add to mondb email, and send the email
 app.put("/sendEmail", async (req, res) => {
   console.log("function executed");
   try {
