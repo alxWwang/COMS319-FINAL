@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const url = "mongodb://localhost:27017";
-const dbName = "mappyDB";//database name
+const dbName = "mappyDB"; //database name
 
 const client = new MongoClient(url);
 const db = client.db(dbName);
@@ -40,7 +40,7 @@ app.get("/getRoute", async (req, res) => {
   }
 });
 
-//delete mongodb 
+//delete mongodb
 app.delete("/delete/:id", async (req, res) => {
   const id = req.params.id;
   console.log(`deleting ${id}`);
@@ -53,7 +53,7 @@ app.delete("/delete/:id", async (req, res) => {
   if (coll.deletedCount === 0) {
     console.log("no such document found");
   } else {
-    res.status(200)
+    res.status(200);
     console.log("document deleted successfully!");
   }
 });
@@ -66,7 +66,7 @@ app.post("/addRoute", async (req, res) => {
 
     const coll = await db.collection("routes").insertOne(req.body);
     console.log("Document inserted");
-    res.status(200)
+    res.status(200);
   } catch (error) {
     console.error("An error occured: ", error);
   } finally {
@@ -95,8 +95,7 @@ app.put("/sendEmail", async (req, res) => {
     });
     console.log(req.body);
 
-
-    const email = req.body['email'];
+    const email = req.body["email"];
     const query = { email: email };
 
     const updateData = {
@@ -104,10 +103,10 @@ app.put("/sendEmail", async (req, res) => {
         name: req.body.name,
       },
     };
-    
+
     const user = await db.collection("email").findOne(query);
-    console.log(user)
-    if (user == null){
+    console.log(user);
+    if (user == null) {
       const coll = await db.collection("email").insertOne(req.body);
       console.log("Document inserted");
     }
