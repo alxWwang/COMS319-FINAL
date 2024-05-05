@@ -28,14 +28,6 @@ function App() {
   const [routesArray, setRoutesArray] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("allPlace: ", allPlaceArray);
-  // }, [allPlaceArray]);
-
-  // useEffect(() => {
-  //   console.log("routesArray: ", routesArray);
-  // }, [routesArray]);
-
   let loadRoutes = async () => {
     try {
       const response = await fetch("http://localhost:3000/getRoute");
@@ -109,27 +101,7 @@ function App() {
     setZoom(zoom);
   };
 
-  // let searchPlaces = () => {
-  //   const req = {
-  //     textQuery: "Tugu Muda",
-  //     fields: ["displayName", "location", "businessStatus", "photos"],
-  //   };
-
-  //   let place = loader.importLibrary("places").then((el) => {
-  //     el.Place.searchByText(req).then((res) => {
-  //       let place = res["places"][0]["Fg"];
-  //       console.log(place);
-  //       place["photos"] = place["photos"][0];
-  //       let latM = place["location"]["lat"];
-  //       let lngM = place["location"]["lng"];
-  //       moveMap(latM, lngM, 15);
-  //       addMarker([place]);
-  //       nearbyPlaces(place);
-  //       // sendEmail(place, "nicholaspribadi.1209@gmail.com");
-  //     });
-  //   });
-  // };
-
+  
   let nearbyPlaces = (places) => {
     let latM = places["location"]["lat"];
     let lngM = places["location"]["lng"];
@@ -193,8 +165,6 @@ function App() {
     await deletor(place);
   };
 
-  /////
-
   const [searchValue, setSearchValue] = useState("Iowa State University");
 
   // Handler for input change
@@ -231,22 +201,12 @@ function App() {
       searchPlaces();
     }
   };
-  ////////
+
   function getScrollAmount() {
     // Adjust scroll amount based on viewport width
     return window.innerWidth <= 768 ? 100 : 200;
   }
 
-  function scrollLeft() {
-    const container = document.querySelector(".flex-container");
-    container.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
-  }
-
-  function scrollRight() {
-    const container = document.querySelector(".flex-container");
-    container.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
-  }
-  ///////////
   const handleEmail = (e) => {
     e.preventDefault(); // Prevents form submission or other default actions
     setCurrentView(3);
