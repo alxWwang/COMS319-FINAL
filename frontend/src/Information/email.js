@@ -33,6 +33,10 @@ function Email() {
         body: JSON.stringify(data),
       });
 
+      if(response.status == 200){
+        alert('Email sent')
+      }
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

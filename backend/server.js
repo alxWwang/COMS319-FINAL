@@ -123,7 +123,7 @@ app.put("/sendEmail", async (req, res) => {
       if (el.photos === undefined) {
         url = "";
       } else {
-        url = `https://places.googleapis.com/v1/${el.photos.name}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44`;
+        url = `https://places.googleapis.com/v1/${el.photos.name}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyAqO3mwogXgEIApBeTBmDKF27wAGp_p7nY`;
       }
       console.log(url);
       console.log();
@@ -172,10 +172,11 @@ app.put("/sendEmail", async (req, res) => {
       });
 
       console.log("Message sent: %s", info.messageId);
+      res.sendStatus(200);
     }
     main().catch(console.error);
 
-    res.sendStatus(200);
+    
   } catch (error) {
     console.error("An error occured: ", error);
   } finally {

@@ -11,14 +11,14 @@ import { Loader } from "@googlemaps/js-api-loader";
 import "@fortawesome/fontawesome-free/css/all.min.css"; //BUTTON ICON
 import { currentViewContext } from "./website";
 
-const YOUR_API_KEY = "AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"; // Replace with your actual API key
+const YOUR_API_KEY = "AIzaSyAqO3mwogXgEIApBeTBmDKF27wAGp_p7nY"; // Replace with your actual API key
 
 function App() {
   //onclick function for save button to email page
   const { currentView, setCurrentView } = useContext(currentViewContext);
 
   const loader = new Loader({
-    apiKey: "AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44",
+    apiKey: YOUR_API_KEY,
   });
 
   const [position, setPosition] = useState({ lat: 1, lng: 1 });
@@ -263,7 +263,7 @@ function App() {
               if (el["photos"] === undefined) {
                 url = "";
               } else {
-                url = `"https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"`;
+                url = `"https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=${YOUR_API_KEY}"`;
               }
 
               return (
@@ -300,7 +300,7 @@ function App() {
             if (el["photos"] === undefined) {
               url = "";
             } else {
-              url = `"https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=AIzaSyCjYXZxKuPYLUKNH-v_RhheHwhBP8UyV44"`;
+              url = `"https://places.googleapis.com/v1/${el["photos"]["name"]}/media?maxHeightPx=200&maxWidthPx=200&key=${YOUR_API_KEY}"`;
             }
 
             return (
